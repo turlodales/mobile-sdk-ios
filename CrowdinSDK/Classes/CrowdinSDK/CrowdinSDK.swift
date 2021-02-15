@@ -62,6 +62,20 @@ public typealias CrowdinSDKLocalizationUpdateError = ([Error]) -> Void
         }
     }
     
+    /// Initialization method. Initialize library with passed localization provider.
+    ///
+    /// - Parameter remoteStorage: Custom localization remote storage which will be used to download localizations.
+    /// - Parameter completion: Remote storage preperation completion handler.
+    class func startSyncWithRemoteStorage(_ remoteStorage: RemoteLocalizationStorageProtocol) {
+        let semaphore = DispatchSemaphore(value: 0)
+        remoteStorage.prepare {
+            semaphore.signal()
+        }
+        semaphore.wait(timeout: .now() + 60)
+        self.setRemoteStorage(remoteStorage)
+        self.initializeLib()
+    }
+    
     /// Removes all stored information by SDK from application Documents folder. Use to clean up all files used by SDK.
     public class func deintegrate() {
         Localization.current?.provider.deintegrate()

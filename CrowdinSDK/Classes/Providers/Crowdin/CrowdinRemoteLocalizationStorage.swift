@@ -31,6 +31,7 @@ class CrowdinRemoteLocalizationStorage: RemoteLocalizationStorageProtocol {
                 completion()
             }, error: {
                 LocalizationUpdateObserver.shared.notifyError(with: [$0])
+                completion()
             })
         } else {
             completion()
