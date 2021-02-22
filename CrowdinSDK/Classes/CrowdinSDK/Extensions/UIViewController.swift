@@ -43,6 +43,7 @@ public extension UIViewController {
         }
 
         self.alertWindow?.makeKeyAndVisible()
+        self.modalPresentationStyle = .fullScreen
         self.alertWindow?.rootViewController?.present(self, animated: true, completion: nil)
     }
     

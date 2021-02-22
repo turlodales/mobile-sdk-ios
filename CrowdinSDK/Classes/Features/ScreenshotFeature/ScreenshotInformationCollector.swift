@@ -7,9 +7,10 @@
 
 import Foundation
 
-public struct ControlInformation {
+public struct ControlInformation: Equatable {
 	var key: String
 	var rect: CGRect
+    var originalRect: CGRect
 }
 
 class ScreenshotInformationCollector {
@@ -27,7 +28,7 @@ class ScreenshotInformationCollector {
 			if let label = subview as? UILabel, let localizationKey = label.localizationKey {
 				if let frame = label.superview?.convert(label.frame, to: rootView), rootView.bounds.contains(frame), frame.isValid { // Check wheather control frame is visible on screen.
                     let newRect = CGRect(x: frame.origin.x * scale, y: frame.origin.y * scale, width: frame.size.width * scale, height: frame.size.height * scale)
-                    description.append(ControlInformation(key: localizationKey, rect: newRect))
+                    description.append(ControlInformation(key: localizationKey, rect: newRect, originalRect: frame))
 				}
 			}
             description.append(contentsOf: getControlsInformation(from: subview, rootView: rootView))

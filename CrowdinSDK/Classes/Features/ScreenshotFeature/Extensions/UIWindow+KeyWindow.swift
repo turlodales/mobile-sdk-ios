@@ -11,6 +11,10 @@ extension UIApplication {
     var cw_KeyWindow: UIWindow? {
         return windows.first(where: { $0.isKind(of: UIWindow.self) })
     }
+    
+    var cw_windows: [UIWindow] {
+        return windows.filter({ $0.isKind(of: UIWindow.self) })
+    }
 }
 
 extension UIWindow {
