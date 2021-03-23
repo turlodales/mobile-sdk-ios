@@ -15,7 +15,7 @@ typealias CrowdinAPIStringsMappingCompletion = (([String: String]?, Error?) -> V
 typealias CrowdinAPIPluralsMappingCompletion = (([AnyHashable: Any]?, Error?) -> Void)
 typealias CrowdinAPIXliffMappingCompletion = (([AnyHashable: Any]?, Error?) -> Void)
 
-typealias CrowdinAPIManifestCompletion = ((ManifestResponse?, Error?) -> Void)
+typealias CrowdinAPIManifestCompletion = ((ManifestResponse?, String?, Error?) -> Void)
 
 class CrowdinContentDeliveryAPI: BaseAPI {
     enum FileType: String {
@@ -61,7 +61,18 @@ class CrowdinContentDeliveryAPI: BaseAPI {
         if let etag = etag {
             headers = [Strings.ifNoneMatch.rawValue: etag]
         }
-        super.get(url: stringURL, headers: headers, completion: completion)
+        super.get(url: stringURL, headers: headers) { data, response, error in
+            completion(data, response, error)
+            CrowdinAPILog.logRequest(
+                method: .GET,
+                url: stringURL,
+                parameters: nil,
+                headers: headers,
+                body: nil,
+                responseData: data,
+                error: error
+            )
+        }
     }
     
     // MARK - Localization download methods:
@@ -175,30 +186,30 @@ class CrowdinContentDeliveryAPI: BaseAPI {
             if let data = data {
                 do {
                     let response = try JSONDecoder().decode(ManifestResponse.self, from: data)
-                    completion(response, nil)
+                    completion(response, stringURL, nil)
                 } catch {
-                    completion(nil, error)
+                    completion(nil, nil, error)
                 }
             } else {
-                completion(nil, error)
+                completion(nil, nil, error)
             }
         }
     }
     
-    func getManifestSync() -> ManifestResponse? {
+    func getManifestSync() -> (response: ManifestResponse?, error: Error?) {
         let stringURL = buildURL(fileType: .manifest, filePath: ".json", timestamp: nil)
         let result = super.get(url: stringURL)
         if let data = result.data {
             do {
                 let response = try JSONDecoder().decode(ManifestResponse.self, from: data)
-                return response
+                CrowdinAPILog.logRequest(response: response, stringURL: stringURL, message: "Download manifest for hash - \(hash) for sync")
+                return (response, nil)
             } catch {
-                LocalizationUpdateObserver.shared.notifyError(with: [error])
-                return nil
+                return (nil, error)
             }
         } else {
-            LocalizationUpdateObserver.shared.notifyError(with: [NSError(domain: "Unable to download manifest for hash - \(hash)", code: defaultCrowdinErrorCode, userInfo: nil)])
-            return nil
+            let error = NSError(domain: "Unable to download manifest for hash - \(hash)", code: -1, userInfo: nil)
+            return (nil, error)
         }
     }
 }

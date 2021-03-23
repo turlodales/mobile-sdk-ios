@@ -20,26 +20,23 @@ extension SettingsView {
             if let loginCell = tableView.dequeueReusableCell(withIdentifier: "SettingsItemCell") as? SettingsItemCell {
                 if !LoginFeature.isLogined {
                     loginCell.titleLabel.text = "Log in"
-                    loginCell.action = {
+                    loginCell.action = { [weak self] in
                         loginFeature.login(completion: {
                             CrowdinLogsCollector.shared.add(log: CrowdinLog(type: .info, message: "Successfully logined"))
                         }, error: { (error) in
                             CrowdinLogsCollector.shared.add(log: CrowdinLog(type: .error, message: "Login error - \(error.localizedDescription)"))
                         })
-                        self.isHidden = false
-                        self.open = false
+                        self?.isHidden = false
+                        self?.open = false
                     }
                 } else {
                     loginCell.titleLabel.text = "Logged in"
-                    loginCell.action = {
-                        if let realtimeUpdateFeature = RealtimeUpdateFeature.shared, realtimeUpdateFeature.enabled {
-                            realtimeUpdateFeature.stop()
-                        }
-                        loginFeature.logout()
-                        self.open = false
+                    loginCell.action = { [weak self] in
+                        self?.showConfirmationLogoutAlert()
                     }
                 }
                 loginCell.statusView.backgroundColor = LoginFeature.isLogined ? self.enabledStatusColor : .clear
+                loginCell.selectionStyle = .none
                 cells.append(loginCell)
             }
         }
@@ -125,6 +122,7 @@ extension SettingsView {
                 let logsNC = UINavigationController(rootViewController: logsVC)
                 logsVC.title = "Logs"
                 logsVC.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Done", style: .done, target: logsNC, action: #selector(UIViewController.cw_dismiss))
+                logsVC.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Clear logs", style: .done, target: logsNC, action: #selector(UIViewController.cw_askToClearLogsAlert))
                 logsNC.modalPresentationStyle = .fullScreen
                 logsNC.cw_present()
                 self.isHidden = false
