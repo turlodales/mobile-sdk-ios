@@ -23,22 +23,52 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             .with(realtimeUpdatesEnabled: true)
             .with(screenshotsEnabled: true)
         
+        
+        _ = CrowdinSDK.addErrorUpdateHandler({ _ in
+            self.navigateToMainScreen()
+        })
+        
+        _ = CrowdinSDK.addDownloadHandler {
+            self.navigateToMainScreen()
+        }
+        
         CrowdinSDK.startWithConfig(crowdinSDKConfig, completion: { })
-//        CrowdinSDK.currentLocalization = "fr"
+
+        CrowdinSDK.currentLocalization = "en"
+        
+        
+        struct JSON: Codable {
+            var i: Int
+        }
+        
+        
+        let data = Data()
+        do {
+            try JSONDecoder().decode(JSON.self, from:data)
+        } catch {
+            print(error.localizedDescription)
+        }
+        
         
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
-        //Create Nav Controller
-        let navController = UINavigationController(rootViewController: MainVC())
-
         //source: https://www.youtube.com/watch?v=Htn4h51BQsk
         window = UIWindow(frame: windowScene.coordinateSpace.bounds)
         window?.windowScene = windowScene
-        window?.rootViewController = navController
+        window?.rootViewController = SplashVC(nibName: "SplashVC", bundle: nil  )
         window?.makeKeyAndVisible()
+    }
+    
+    func navigateToMainScreen() {
+        //Create Nav Controller
+        DispatchQueue.main.async {
+            let navController = UINavigationController(rootViewController: MainVC())
+            self.window?.rootViewController = navController
+            self.window?.makeKeyAndVisible()
+        }
     }
     
     func sceneDidDisconnect(_ scene: UIScene) {

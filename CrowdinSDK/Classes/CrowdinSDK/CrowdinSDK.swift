@@ -71,9 +71,22 @@ public typealias CrowdinSDKLocalizationUpdateError = ([Error]) -> Void
         remoteStorage.prepare {
             semaphore.signal()
         }
-        semaphore.wait(timeout: .now() + 60)
+        _ = semaphore.wait(timeout: .distantFuture)
         self.setRemoteStorage(remoteStorage)
         self.initializeLib()
+        var downloadHandlerId: Int = -1
+        downloadHandlerId = self.addDownloadHandler {
+            semaphore.signal()
+            self.removeDownloadHandler(downloadHandlerId)
+        }
+        
+        var errorHandlerId: Int = -1
+        errorHandlerId = self.addErrorUpdateHandler({ (erors) in
+            semaphore.signal()
+            self.removeErrorHandler(errorHandlerId)
+        })
+        _ = semaphore.wait(timeout: .now() + 10)
+        print("Initialized")
     }
     
     /// Removes all stored information by SDK from application Documents folder. Use to clean up all files used by SDK.

@@ -34,9 +34,12 @@ class Localization {
             if let localization = newValue {
                 Localization.current?.provider.localization = localization
                 Localization.current?.extractor.localization = localization
+                UserDefaults.standard.appleLanguage = localization
             } else {
                 Localization.current?.provider.localization = autoDetectedLocalization
                 Localization.current?.extractor.localization = autoDetectedLocalization
+                UserDefaults.standard.appleLanguage = autoDetectedLocalization
+                
             }
 		}
 		get {
