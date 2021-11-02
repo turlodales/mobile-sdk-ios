@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -66,6 +66,7 @@
 		E82913D9257300E70068A629 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E82913D7257300E70068A629 /* Localizable.strings */; };
 		E837B5F32596484F00656C9B /* SettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E837B5F22596484F00656C9B /* SettingsVC.swift */; };
 		E879E42026CF140600C9ED7B /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E879E41F26CF140600C9ED7B /* Tests.swift */; };
+		E8FAC8192731422C00E33DED /* CrowdinSDK in Frameworks */ = {isa = PBXBuildFile; productRef = E8FAC8182731422C00E33DED /* CrowdinSDK */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -161,6 +162,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E8FAC8192731422C00E33DED /* CrowdinSDK in Frameworks */,
 				2FC55D4EC80CB8BECFA839F2 /* Pods_AppleReminders.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -384,6 +386,7 @@
 			);
 			name = AppleReminders;
 			packageProductDependencies = (
+				E8FAC8182731422C00E33DED /* CrowdinSDK */,
 			);
 			productName = AppleReminders;
 			productReference = 12706DD523DBB9320001D243 /* AppleReminders.app */;
@@ -438,6 +441,7 @@
 			);
 			mainGroup = 12706DCC23DBB9320001D243;
 			packageReferences = (
+				E8FAC8172731422C00E33DED /* XCRemoteSwiftPackageReference "mobile-sdk-ios" */,
 			);
 			productRefGroup = 12706DD623DBB9320001D243 /* Products */;
 			projectDirPath = "";
@@ -861,6 +865,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		E8FAC8172731422C00E33DED /* XCRemoteSwiftPackageReference "mobile-sdk-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "git@github.com:crowdin/mobile-sdk-ios.git";
+			requirement = {
+				branch = "spm-1.0";
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		E8FAC8182731422C00E33DED /* CrowdinSDK */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E8FAC8172731422C00E33DED /* XCRemoteSwiftPackageReference "mobile-sdk-ios" */;
+			productName = CrowdinSDK;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 12706DCD23DBB9320001D243 /* Project object */;
 }
