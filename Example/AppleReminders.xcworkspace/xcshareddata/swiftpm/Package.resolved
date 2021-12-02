@@ -6,8 +6,8 @@
         "repositoryURL": "https://github.com/serhii-londar/BaseAPI.git",
         "state": {
           "branch": null,
-          "revision": "101edffad4b007f66849c2af1874e7703f2bf113",
-          "version": "0.2.1"
+          "revision": "f4dca40b8775c26974f8c6298df84132e98331eb",
+          "version": "0.2.0"
         }
       },
       {
@@ -15,7 +15,7 @@
         "repositoryURL": "git@github.com:crowdin/mobile-sdk-ios.git",
         "state": {
           "branch": "spm-1.0",
-          "revision": "401df5439abcc056a14465e7a7c65a49189b9415",
+          "revision": "0dc46ab2130f09e04d113ea8cd846367771dedd8",
           "version": null
         }
       },
