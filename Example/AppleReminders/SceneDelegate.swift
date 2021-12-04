@@ -8,6 +8,7 @@
 
 import UIKit
 import CrowdinSDK
+
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
     
@@ -20,22 +21,22 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     private let clientSecret = "client_secret"
     
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        let crowdinProviderConfig = CrowdinProviderConfig(hashString: distributionHash,
-                                                          sourceLanguage: sourceLanguage)
-        let loginConfig = try! CrowdinLoginConfig(clientId: clientId,
-                                                  clientSecret: clientSecret,
-                                                  scope: "project")
-        let crowdinSDKConfig = CrowdinSDKConfig.config().with(crowdinProviderConfig: crowdinProviderConfig)
-            .with(loginConfig: loginConfig)
-            .with(settingsEnabled: true)
-            .with(realtimeUpdatesEnabled: true)
-            .with(screenshotsEnabled: true)
-        
-        CrowdinSDK.startWithConfig(crowdinSDKConfig, completion: { })
-        // Now new log message comes as callback
-        CrowdinSDK.setOnLogCallback { logMessage in
-            print("LOG MESSAGE - \(logMessage)")
-        }
+//        let crowdinProviderConfig = CrowdinProviderConfig(hashString: distributionHash,
+//                                                          sourceLanguage: sourceLanguage)
+//        let loginConfig = try! CrowdinLoginConfig(clientId: clientId,
+//                                                  clientSecret: clientSecret,
+//                                                  scope: "project")
+//        let crowdinSDKConfig = CrowdinSDKConfig.config().with(crowdinProviderConfig: crowdinProviderConfig)
+//            .with(loginConfig: loginConfig)
+//            .with(settingsEnabled: true)
+//            .with(realtimeUpdatesEnabled: true)
+//            .with(screenshotsEnabled: true)
+//
+//        CrowdinSDK.startWithConfig(crowdinSDKConfig, completion: { })
+//        // Now new log message comes as callback
+//        CrowdinSDK.setOnLogCallback { logMessage in
+//            print("LOG MESSAGE - \(logMessage)")
+//        }
 //        CrowdinSDK.currentLocalization = "fr"
         
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
@@ -83,7 +84,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
         guard let url = URLContexts.first?.url else { return }
-        CrowdinSDK.handle(url: url)
+//        CrowdinSDK.handle(url: url)
     }
 }
 
