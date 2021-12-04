@@ -11,8 +11,9 @@ import CrowdinCore
 extension CrowdinSDKConfig {
     // Crowdin provider configuration
     private static var crowdinProviderConfig: CrowdinProviderConfig? = nil
+    
     // Realtime updates
-    var crowdinProviderConfig: CrowdinProviderConfig? {
+    public var crowdinProviderConfig: CrowdinProviderConfig? {
         get {
             return CrowdinSDKConfig.crowdinProviderConfig
         }

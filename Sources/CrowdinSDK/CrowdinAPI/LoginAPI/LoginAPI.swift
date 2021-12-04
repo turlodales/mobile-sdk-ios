@@ -8,7 +8,7 @@
 import Foundation
 import BaseAPI
 
-class LoginAPI: BaseAPI {
+public final class LoginAPI: BaseAPI {
     fileprivate let defaultCrowdinErrorCode = 9999
     var organizationName: String?
     var clientId: String
@@ -16,7 +16,7 @@ class LoginAPI: BaseAPI {
     var scope: String
     var redirectURI: String
     
-    init(clientId: String, clientSecret: String, scope: String, redirectURI: String, organizationName: String? = nil, session: URLSession = URLSession.shared) {
+    public init(clientId: String, clientSecret: String, scope: String, redirectURI: String, organizationName: String? = nil, session: URLSession = URLSession.shared) {
         self.clientId = clientId
         self.clientSecret = clientSecret
         self.scope = scope
@@ -25,7 +25,7 @@ class LoginAPI: BaseAPI {
         super.init(session: session)
     }
     
-    var loginURLString: String {
+    public var loginURLString: String {
         if let organizationName = organizationName {
             return "https://accounts.crowdin.com/oauth/authorize?client_id=\(clientId)&response_type=code&scope=\(scope)&redirect_uri=\(redirectURI)&domain=\(organizationName)"
         }
@@ -39,7 +39,7 @@ class LoginAPI: BaseAPI {
         return "https://accounts.crowdin.com/oauth/token"
     }
     
-    func hadle(url: URL, completion: @escaping (TokenResponse) -> Void, error: @escaping (Error) -> Void) -> Bool {
+    public func hadle(url: URL, completion: @escaping (TokenResponse) -> Void, error: @escaping (Error) -> Void) -> Bool {
         let components = URLComponents(url: url, resolvingAgainstBaseURL: true)
         guard let queryItems = components?.queryItems else { return false }
         guard let code = queryItems.first(where: { $0.name == "code" })?.value else { return false }
@@ -47,7 +47,7 @@ class LoginAPI: BaseAPI {
         return true
     }
     
-    func getAutorizationToken(with code: String, success: ((TokenResponse) -> Void)?, error: ((Error) -> Void)?) {
+    public func getAutorizationToken(with code: String, success: ((TokenResponse) -> Void)?, error: ((Error) -> Void)?) {
         guard let url = URL(string: tokenStringURL) else {
             error?(NSError(domain: "Unable to create url from - \(tokenStringURL)", code: defaultCrowdinErrorCode, userInfo: nil))
             return
@@ -76,7 +76,7 @@ class LoginAPI: BaseAPI {
         }
     }
     
-    func refreshToken(refreshToken: String, success: ((TokenResponse) -> Void)?, error: ((Error) -> Void)?) {
+    public func refreshToken(refreshToken: String, success: ((TokenResponse) -> Void)?, error: ((Error) -> Void)?) {
         guard let url = URL(string: tokenStringURL) else { return }
         var request = URLRequest(url: url)
         let tokenRequest = RefreshTokenRequest(clientId: clientId, clientSecret: clientSecret, redirectURI: redirectURI, refreshToken: refreshToken)
@@ -101,7 +101,7 @@ class LoginAPI: BaseAPI {
         }
     }
     
-    func refreshTokenSync(refreshToken: String) -> TokenResponse? {
+    public func refreshTokenSync(refreshToken: String) -> TokenResponse? {
         var result: TokenResponse? = nil
         let semaphore = DispatchSemaphore(value: 0)
         self.refreshToken (refreshToken: refreshToken, success: { response in

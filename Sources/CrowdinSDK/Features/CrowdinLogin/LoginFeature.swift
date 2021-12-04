@@ -7,6 +7,8 @@
 
 import UIKit
 import SafariServices
+import CrowdinAPI
+import CrowdinCore
 
 protocol LoginFeatureProtocol {
 	static var shared: Self? { get }

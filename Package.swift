@@ -17,10 +17,6 @@ let package = Package(
     ],
     targets: [
         .target(name: "CrowdinCore",
-                dependencies: [
-//                    "BaseAPI",
-//                    "Starscream"
-                ],
                 path: "Sources/CrowdinSDK/CrowdinCore",
                 exclude: [
 //                    "Providers",
@@ -53,6 +49,17 @@ let package = Package(
                     "Starscream",
                 ],
                 path: "Sources/CrowdinSDK/CrowdinAPI",
+                swiftSettings: [
+                    .define("CrowdinSDKSPM")
+                ]),
+        .target(name: "CrowdinLogin",
+                dependencies: [
+                    "CrowdinCore",
+                    "CrowdinProvider",
+                    "CrowdinAPI",
+                    "BaseAPI",
+                ],
+                path: "Sources/CrowdinSDK/Features/CrowdinLogin",
                 swiftSettings: [
                     .define("CrowdinSDKSPM")
                 ]),

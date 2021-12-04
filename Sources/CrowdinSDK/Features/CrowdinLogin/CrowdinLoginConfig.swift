@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import CrowdinCore
 
 private let URLSchemeDocumentationLink = "https://developer.apple.com/documentation/uikit/inter-process_communication/allowing_apps_and_websites_to_link_to_your_content/defining_a_custom_url_scheme_for_your_app"
 

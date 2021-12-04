@@ -7,9 +7,10 @@
 
 import Foundation
 
-@objcMembers public class CrowdinProviderConfig: NSObject {
-    var hashString: String
-    var sourceLanguage: String
+@objcMembers
+public final class CrowdinProviderConfig: NSObject {
+    public var hashString: String
+    public var sourceLanguage: String
     
     public init(hashString: String, sourceLanguage: String) {
         self.hashString = hashString

@@ -11,6 +11,7 @@ target 'AppleReminders' do
   pod 'CrowdinCore', :path => '../'
   pod 'CrowdinProvider', :path => '../'
   pod 'CrowdinAPI', :path => '../'
+  pod 'CrowdinLogin', :path => '../'
   
   pod 'CrowdinSDK', :path => '../'
 #   pod 'CrowdinSDK/Settings', :path => '../'

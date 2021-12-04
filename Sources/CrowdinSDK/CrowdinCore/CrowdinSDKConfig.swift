@@ -8,7 +8,8 @@
 import Foundation
 
 /// Class with all crowdin sdk information needed for initialization.
-@objcMembers public class CrowdinSDKConfig: NSObject {
+@objcMembers
+public final class CrowdinSDKConfig: NSObject {
     /// Method for new config creation.
     ///
     /// - Returns: New CrowdinSDKConfig object instance.
@@ -18,7 +19,8 @@ import Foundation
     
     var enterprise: Bool = false
 	
-	func with(enterprise: Bool) -> Self {
+    @discardableResult
+	public func with(enterprise: Bool) -> Self {
 		self.enterprise = enterprise
 		return self
 	}

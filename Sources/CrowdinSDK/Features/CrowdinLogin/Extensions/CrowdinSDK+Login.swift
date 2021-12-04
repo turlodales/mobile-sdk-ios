@@ -6,6 +6,8 @@
 //
 
 import Foundation
+import CrowdinCore
+import CrowdinProvider
 
 extension CrowdinSDK {
 	class func setupLogin() {

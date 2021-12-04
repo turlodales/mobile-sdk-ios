@@ -5,6 +5,11 @@ PODS:
     - CrowdinCore
     - Starscream (~> 3.1.0)
   - CrowdinCore (1.3.0)
+  - CrowdinLogin (2.0.0):
+    - BaseAPI (~> 0.2.0)
+    - CrowdinAPI
+    - CrowdinCore
+    - CrowdinProvider
   - CrowdinProvider (2.0.0):
     - BaseAPI (~> 0.2.0)
     - CrowdinAPI
@@ -29,6 +34,7 @@ PODS:
 DEPENDENCIES:
   - CrowdinAPI (from `../`)
   - CrowdinCore (from `../`)
+  - CrowdinLogin (from `../`)
   - CrowdinProvider (from `../`)
   - CrowdinSDK (from `../`)
   - RealmSwift (= 4.3.1)
@@ -49,6 +55,8 @@ EXTERNAL SOURCES:
     :path: "../"
   CrowdinCore:
     :path: "../"
+  CrowdinLogin:
+    :path: "../"
   CrowdinProvider:
     :path: "../"
   CrowdinSDK:
@@ -58,14 +66,15 @@ SPEC CHECKSUMS:
   BaseAPI: 4f0d1ef6d80428f75d54fdc716f6f02103c04eb1
   CrowdinAPI: 998e4d422960b3bd1587bff35458e9e528aa1c4d
   CrowdinCore: 803fc2afcb06d70e173b792f199805d8cf316dfe
+  CrowdinLogin: 3057a68f566c6d50c2812af3c54dbed17a97bfb8
   CrowdinProvider: 2f383dd73655d1134ecfe0f82612f17cb5f1e78a
-  CrowdinSDK: 69b1f9daa7403f8772bc29a50e81bf9ef2b9a094
+  CrowdinSDK: 99b972a9789eb91a798a8eb73878c0997029c9ec
   Realm: 31dc40934081ef740f60feedc46d88473cbfeb40
   RealmSwift: b5199e9a41f67b99f51acf6874a6166f5fbe93d1
   Starscream: 4bb2f9942274833f7b4d296a55504dcfc7edb7b0
   SwiftDate: 72d28954e8e1c6c1c0f917ccc8005e4f83c7d4b2
   SwiftLint: 06ac37e4d38c7068e0935bb30cda95f093bec761
 
-PODFILE CHECKSUM: 2f88aad2c645253c4a9128d8d6c6c6db15ee2580
+PODFILE CHECKSUM: 90c1d6548f76fdd27054e9e5c9d07686957847b0
 
 COCOAPODS: 1.11.2

@@ -7,7 +7,7 @@
 #
 
 Pod::Spec.new do |spec|
-  spec.name             = 'CrowdinSDK'
+  spec.name             = 'CrowdinLogin'
   spec.version          = '2.0.0'
   spec.summary          = 'Crowdin iOS SDK delivers all new translations from Crowdin project to the application immediately'
   
@@ -31,30 +31,14 @@ Pod::Spec.new do |spec|
   
   spec.ios.deployment_target = '9.0'
   
-  spec.frameworks = 'UIKit'
+  
+  spec.frameworks = 'Foundation', 'SafariServices'
   spec.static_framework = false
   spec.swift_version = '4.2'
-  spec.source_files = 'Sources/CrowdinSDK/CrowdinSDK/**/*'
-  spec.default_subspecs = 'Core', 'Provider'
-
-  spec.subspec 'Core' do |subspec|
-    subspec.name = 'Core'
-    subspec.dependency 'CrowdinCore'
-  end
-
-  spec.subspec 'Provider' do |subspec|
-    subspec.name = 'Provider'
-    subspec.dependency 'CrowdinProvider'
-  end
-
-  spec.subspec 'API' do |subspec|
-    subspec.name = 'API'
-    subspec.dependency 'CrowdinAPI'
-  end
   
- spec.subspec 'Login' do |subspec|
-   subspec.name = 'Login'
-   subspec.dependency 'CrowdinLogin'
- end
-  
+  spec.source_files = 'Sources/CrowdinSDK/Features/CrowdinLogin/**/*.swift'
+  spec.dependency 'CrowdinCore'
+  spec.dependency 'CrowdinProvider'
+  spec.dependency 'CrowdinAPI'
+  spec.dependency 'BaseAPI', '~> 0.2.0'
 end

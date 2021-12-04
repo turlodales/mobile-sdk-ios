@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import CrowdinCore
 
 extension CrowdinSDKConfig {
 	private static var loginConfig: CrowdinLoginConfig?
@@ -21,7 +22,7 @@ extension CrowdinSDKConfig {
 	
 	public func with(loginConfig: CrowdinLoginConfig) -> Self {
 		self.loginConfig = loginConfig
-        self.enterprise = loginConfig.organizationName != nil
+        with(enterprise: loginConfig.organizationName != nil)
 		return self
 	}
 }
