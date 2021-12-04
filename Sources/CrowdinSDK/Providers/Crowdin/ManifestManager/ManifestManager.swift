@@ -6,6 +6,8 @@
 //
 
 import Foundation
+import CrowdinAPI
+import CrowdinCore
 
 class ManifestManager {
     fileprivate static var shared: ManifestManager?
@@ -15,7 +17,7 @@ class ManifestManager {
     var files: [String]
     var timestamp: TimeInterval?
     var languages: [String]?
-    var customLanguages: [CustomLangugage]?
+    var customLanguages: [CrowdinLanguage]?
     
     var contentDeliveryAPI: CrowdinContentDeliveryAPI
     

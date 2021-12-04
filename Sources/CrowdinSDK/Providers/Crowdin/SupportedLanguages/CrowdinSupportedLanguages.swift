@@ -6,6 +6,8 @@
 //
 
 import Foundation
+import CrowdinAPI
+import CrowdinCore
 
 extension LanguagesResponseData: CrowdinLanguage { }
 
@@ -21,7 +23,7 @@ class CrowdinSupportedLanguages {
         case lastUpdatedDate = "CrowdinSupportedLanguages.lastUpdatedDate"
     }
     fileprivate var filePath: String {
-        return CrowdinFolder.shared.path + String.pathDelimiter + Strings.Crowdin.rawValue + String.pathDelimiter + Strings.SupportedLanguages.rawValue + FileType.json.extension
+        return CrowdinSDK.folderPath + "/" + Strings.Crowdin.rawValue + "/" + Strings.SupportedLanguages.rawValue + ".json"//FileType.json.extension
     }
     fileprivate var lastUpdatedDate: Date? {
         set {
@@ -68,7 +70,7 @@ class CrowdinSupportedLanguages {
             guard let supportedLanguages = supportedLanguages else { return }
             self.supportedLanguages = supportedLanguages
             self.lastUpdatedDate = Date()
-            CrowdinLogsCollector.shared.add(log: CrowdinLog(type: .info, message: "Download supported languages success"))
+            CrowdinLogsCollector.shared.add(log: CrowdinLog.info(with: "Download supported languages success"))
             completion?()
         }
     }

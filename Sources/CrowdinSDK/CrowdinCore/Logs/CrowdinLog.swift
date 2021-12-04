@@ -7,7 +7,7 @@
 
 import UIKit
 
-enum CrowdinLogType: String {
+public enum CrowdinLogType: String {
     
     case info
     case error
@@ -33,32 +33,32 @@ extension CrowdinLogType {
 
 public struct CrowdinLog {
     let date = Date()
-    let type: CrowdinLogType
-    let message: String
-    var attributedDetails: NSAttributedString? = nil
+    public let type: CrowdinLogType
+    public let message: String
+    public var attributedDetails: NSAttributedString? = nil
     
-    static func info(with message: String, attributedDetails: NSAttributedString? = nil) -> CrowdinLog {
+    public static func info(with message: String, attributedDetails: NSAttributedString? = nil) -> CrowdinLog {
         var log = CrowdinLog(type: .info, message: message)
         log.attributedDetails = attributedDetails
         
         return log
     }
     
-    static func error(with message: String, attributedDetails: NSAttributedString? = nil) -> CrowdinLog {
+    public static func error(with message: String, attributedDetails: NSAttributedString? = nil) -> CrowdinLog {
         var log = CrowdinLog(type: .error, message: message)
         log.attributedDetails = attributedDetails
         
         return log
     }
     
-    static func warning(with message: String, attributedDetails: NSAttributedString? = nil) -> CrowdinLog {
+    public static func warning(with message: String, attributedDetails: NSAttributedString? = nil) -> CrowdinLog {
         var log = CrowdinLog(type: .warning, message: message)
         log.attributedDetails = attributedDetails
         
         return log
     }
     
-    static func rest(with message: String, attributedDetails: NSAttributedString? = nil) -> CrowdinLog {
+    public static func rest(with message: String, attributedDetails: NSAttributedString? = nil) -> CrowdinLog {
         var log = CrowdinLog(type: .rest, message: message)
         log.attributedDetails = attributedDetails
         

@@ -9,7 +9,7 @@ import Foundation
 
 public struct CrowdinAPILog {
     
-    static func logRequest(
+    static public func logRequest(
         method: String,
         url: String,
         parameters: [String: String]? = nil,
@@ -36,7 +36,7 @@ public struct CrowdinAPILog {
         CrowdinLogsCollector.shared.add(log: .info(with: message, attributedDetails: attributedText))
     }
     
-    static func logRequest(
+    static public func logRequest(
         type: CrowdinLogType = .info,
         stringURL: String,
         message: String

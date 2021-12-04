@@ -6,7 +6,9 @@
 //
 
 import Foundation
+import CrowdinCore
 
+/*
 extension CrowdinSDK {
     /// Association object for storing localization keys for different states.
     private static let localizationProviderObjectAssociation = ObjectAssociation<LocalizationProvider>()
@@ -47,9 +49,6 @@ extension CrowdinSDK {
     public class func localizationDictionary(for localization: String) -> [AnyHashable: Any] {
         let localLocalizationStorage = LocalLocalizationStorage(localization: localization)
         localLocalizationStorage.fetchData()
-        if localLocalizationStorage.strings.count == 0 {
-            
-        }
         return [
             "localization": localLocalizationStorage.localization,
             "strings": localLocalizationStorage.strings,
@@ -96,3 +95,4 @@ extension CrowdinSDK {
         }
     }
 }
+*/

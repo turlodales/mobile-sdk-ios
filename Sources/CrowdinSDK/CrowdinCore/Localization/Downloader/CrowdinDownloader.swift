@@ -7,8 +7,8 @@
 
 import Foundation
 
-typealias CrowdinDownloaderCompletion = (_ strings: [String: String]?, _ plurals: [AnyHashable: Any]?, _ errors: [Error]?) -> Void
+public typealias CrowdinDownloaderCompletion = (_ strings: [String: String]?, _ plurals: [AnyHashable: Any]?, _ errors: [Error]?) -> Void
 
-protocol CrowdinDownloaderProtocol {
+public protocol CrowdinDownloaderProtocol {
     func download(with hash: String, for localization: String, completion: @escaping CrowdinDownloaderCompletion)
 }

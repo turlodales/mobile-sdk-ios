@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct ManifestResponse: Codable {
+public struct ManifestResponse: Codable {
     public let files: [String]
     public let timestamp: TimeInterval?
     public let languages: [String]?
@@ -20,7 +20,7 @@ struct ManifestResponse: Codable {
         case responseCustomLanguages = "custom_languages"
     }
     
-    init(from decoder: Decoder) throws {
+    public init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         files = try values.decode([String].self, forKey: .files)
         timestamp = try values.decodeIfPresent(TimeInterval.self, forKey: .timestamp)
@@ -40,14 +40,14 @@ struct ManifestResponse: Codable {
     }
     
     // MARK: - ManifestResponseCustomLangugage
-    struct ManifestResponseCustomLangugage: Codable {
-        let locale: String
-        let twoLettersCode: String
-        let threeLettersCode: String
-        let localeWithUnderscore: String
-        let androidCode: String
-        let osxCode: String
-        let osxLocale: String
+    public struct ManifestResponseCustomLangugage: Codable {
+        public let locale: String
+        public let twoLettersCode: String
+        public let threeLettersCode: String
+        public let localeWithUnderscore: String
+        public let androidCode: String
+        public let osxCode: String
+        public let osxLocale: String
 
         enum CodingKeys: String, CodingKey {
             case twoLettersCode = "two_letters_code"

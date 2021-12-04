@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import CrowdinAPI
 
 typealias CrowdinXliffDownloadOperationCompletion = ([String: String]?, [AnyHashable: Any]?, Error?) -> Void
 

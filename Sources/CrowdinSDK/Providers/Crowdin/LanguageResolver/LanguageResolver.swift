@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import CrowdinCore
 
 protocol LanguageResolver {
     /// Get crowdin language locale code for iOS localization code.

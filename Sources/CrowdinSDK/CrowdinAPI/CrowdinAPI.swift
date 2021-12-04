@@ -8,8 +8,9 @@
 import Foundation
 import UIKit
 import BaseAPI
+import CrowdinCore
 
-protocol CrowdinAuth {
+public protocol CrowdinAuth {
     var accessToken: String? { get }
 }
 
@@ -17,7 +18,7 @@ extension Notification.Name {
     public static let CrowdinAPIUnautorizedNotification = Notification.Name("CrowdinAPIUnautorizedNotification")
 }
 
-class CrowdinAPI: BaseAPI {
+public class CrowdinAPI: BaseAPI {
     let organizationName: String?
     let auth: CrowdinAuth?
     
@@ -29,14 +30,14 @@ class CrowdinAPI: BaseAPI {
     }
     
     var apiPath: String {
-        ""
+        fatalError("Should be overriden in child class")
     }
     
     var fullPath: String {
         baseURL + apiPath
     }
     
-    init(organizationName: String? = nil, auth: CrowdinAuth? = nil, session: URLSession = .shared) {
+    public init(organizationName: String? = nil, auth: CrowdinAuth? = nil, session: URLSession = .shared) {
         self.organizationName = organizationName
         self.auth = auth
         super.init(session: session)

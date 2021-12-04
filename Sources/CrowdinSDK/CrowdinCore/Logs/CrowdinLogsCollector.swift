@@ -28,7 +28,7 @@ final class AtomicProperty<A> {
 }
 
 public final class CrowdinLogsCollector {
-    static let shared = CrowdinLogsCollector()
+    public static let shared = CrowdinLogsCollector()
     
     fileprivate var _logs = AtomicProperty<[CrowdinLog]>([])
     
@@ -36,7 +36,7 @@ public final class CrowdinLogsCollector {
         return _logs.value
     }
     
-    func add(log: CrowdinLog) {
+    public func add(log: CrowdinLog) {
         _logs.mutate { $0.append(log) }
         
         guard let config = CrowdinSDK.config, config.debugEnabled else { return }
@@ -44,7 +44,7 @@ public final class CrowdinLogsCollector {
         print("CrowdinSDK: \(log.message)")
     }
     
-    func clear() {
+    public func clear() {
         _logs.mutate { $0.removeAll() }
     }
 }

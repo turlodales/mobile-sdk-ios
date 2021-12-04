@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import CrowdinCore
 
 public protocol CrowdinMappingManagerProtocol {
     func stringLocalizationKey(for id: Int) -> String?

@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import CrowdinCore
 
 extension ManifestManager: LanguageResolver {
     var allLanguages: [CrowdinLanguage] {

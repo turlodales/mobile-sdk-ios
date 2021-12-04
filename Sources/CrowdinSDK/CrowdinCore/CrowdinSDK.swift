@@ -48,7 +48,7 @@ public typealias CrowdinSDKLogMessage = (String) -> Void
     }
     
     // swiftlint:disable implicitly_unwrapped_optional
-    static var config: CrowdinSDKConfig!
+    public static var config: CrowdinSDKConfig!
     
     ///
     public class func stop() {
@@ -60,7 +60,7 @@ public typealias CrowdinSDKLogMessage = (String) -> Void
     ///
     /// - Parameter remoteStorage: Custom localization remote storage which will be used to download localizations.
     /// - Parameter completion: Remote storage preperation completion handler.
-    class func startWithRemoteStorage(_ remoteStorage: RemoteLocalizationStorageProtocol, completion: @escaping () -> Void) {
+    public class func startWithRemoteStorage(_ remoteStorage: RemoteLocalizationStorageProtocol, completion: @escaping () -> Void) {
         remoteStorage.prepare {
             self.setRemoteStorage(remoteStorage)
             self.initializeLib()
@@ -267,4 +267,8 @@ extension CrowdinSDK {
 			CrowdinSDK.perform(Selectors.setupLogin.rawValue)
 		}
 	}
+}
+
+extension CrowdinSDK {
+    public static var folderPath: String { CrowdinFolder.shared.path }
 }

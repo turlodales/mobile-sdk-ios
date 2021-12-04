@@ -6,6 +6,8 @@
 //
 
 import Foundation
+import CrowdinCore
+import CrowdinAPI
 
 class CrowdinLocalizationDownloader: CrowdinDownloaderProtocol {
     // swiftlint:disable implicitly_unwrapped_optional

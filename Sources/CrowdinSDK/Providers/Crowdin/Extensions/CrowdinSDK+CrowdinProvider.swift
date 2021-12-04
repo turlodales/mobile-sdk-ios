@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import CrowdinCore
 
 extension CrowdinSDK {
     /// Initialization method. Uses default CrowdinProvider with initialization values from Info.plist file.

@@ -6,18 +6,19 @@
 //
 
 import Foundation
+import CrowdinCore
 
-struct CustomLangugage {
-    let id: String
-    let locale: String
-    let twoLettersCode: String
-    let threeLettersCode: String
-    let localeWithUnderscore: String
-    let androidCode: String
-    let osxCode: String
-    let osxLocale: String
+public struct CustomLangugage {
+    public let id: String
+    public let locale: String
+    public let twoLettersCode: String
+    public let threeLettersCode: String
+    public let localeWithUnderscore: String
+    public let androidCode: String
+    public let osxCode: String
+    public let osxLocale: String
     
-    init(id: String, customLanguage: ManifestResponse.ManifestResponseCustomLangugage) {
+    public init(id: String, customLanguage: ManifestResponse.ManifestResponseCustomLangugage) {
         self.id = id
         self.locale = customLanguage.locale
         self.twoLettersCode = customLanguage.twoLettersCode
@@ -30,7 +31,7 @@ struct CustomLangugage {
 }
 
 extension ManifestResponse {
-    var customLanguages: [CustomLangugage] {
+    public var customLanguages: [CustomLangugage] {
         return responseCustomLanguages?.compactMap({ (key: String, value: ManifestResponseCustomLangugage) in
             CustomLangugage(id: key, customLanguage: value)
         }) ?? []
@@ -38,7 +39,7 @@ extension ManifestResponse {
 }
 
 extension CustomLangugage: CrowdinLanguage {
-    var name: String {
+    public var name: String {
         return id
     }
 }

@@ -33,44 +33,44 @@ class HandlerContainer<HandlerType>: HandlerContainerProtocol {
     }
 }
 
-typealias LocalizationUpdateDownload = () -> Void
-typealias LocalizationUpdateError = ([Error]) -> Void
+public typealias LocalizationUpdateDownload = () -> Void
+public typealias LocalizationUpdateError = ([Error]) -> Void
 
-class LocalizationUpdateObserver {
-    static var shared = LocalizationUpdateObserver()
+public class LocalizationUpdateObserver {
+    static public var shared = LocalizationUpdateObserver()
     
     var downloadHandlerContainer = HandlerContainer<LocalizationUpdateDownload>()
     var errorHandlerContainer = HandlerContainer<LocalizationUpdateError>()
     
-    func addDownloadHandler(_ handler: @escaping LocalizationUpdateDownload) -> Int {
+    public func addDownloadHandler(_ handler: @escaping LocalizationUpdateDownload) -> Int {
         return downloadHandlerContainer.subscribe(handler: handler)
     }
     
-    func removeDownloadHandler(_ id: Int) {
+    public func removeDownloadHandler(_ id: Int) {
         downloadHandlerContainer.unsubscribe(with: id)
     }
     
-    func removeAllDownloadHandlers() {
+    public func removeAllDownloadHandlers() {
         downloadHandlerContainer.unsubscribe()
     }
     
-    func addErrorHandler(_ handler: @escaping LocalizationUpdateError) -> Int {
+    public func addErrorHandler(_ handler: @escaping LocalizationUpdateError) -> Int {
         return errorHandlerContainer.subscribe(handler: handler)
     }
     
-    func removeErrorHandler(_ id: Int) {
+    public func removeErrorHandler(_ id: Int) {
         errorHandlerContainer.unsubscribe(with: id)
     }
     
-    func removeAllErrorHandlers() {
+    public func removeAllErrorHandlers() {
         errorHandlerContainer.unsubscribe()
     }
     
-    func notifyDownload() {
+    public func notifyDownload() {
         downloadHandlerContainer.handlers.values.forEach({ $0() })
     }
     
-    func notifyError(with errors: [Error]) {
+    public func notifyError(with errors: [Error]) {
         errorHandlerContainer.handlers.values.forEach({ $0(errors) })
         errors.forEach({ CrowdinLogsCollector.shared.add(log: CrowdinLog(type: .error, message: "Localization downloading error - \($0.localizedDescription)")) })
     }

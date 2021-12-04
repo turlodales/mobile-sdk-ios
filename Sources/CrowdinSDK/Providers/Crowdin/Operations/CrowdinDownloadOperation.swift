@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import CrowdinAPI
 
 protocol CrowdinDownloadOperationProtocol {
     var filePath: String { get }

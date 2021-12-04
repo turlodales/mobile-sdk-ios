@@ -6,6 +6,8 @@
 //
 
 import Foundation
+import CrowdinCore
+import CrowdinAPI
 
 class CrowdinMappingDownloader: CrowdinDownloaderProtocol {
     fileprivate var completion: CrowdinDownloaderCompletion? = nil

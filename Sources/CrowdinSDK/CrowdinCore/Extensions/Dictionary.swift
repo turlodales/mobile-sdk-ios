@@ -8,7 +8,7 @@
 import Foundation
 
 extension Dictionary {
-    mutating func mergeRecursively(with dict: [Key: Value]) {
+    mutating public func mergeRecursively(with dict: [Key: Value]) {
         for (k, rv) in dict {
             // case of existing left value
             if let lv = self[k] {
@@ -24,19 +24,19 @@ extension Dictionary {
         }
     }
     
-	mutating func merge(with dict: [Key: Value]) {
+	mutating public func merge(with dict: [Key: Value]) {
 		for (k, v) in dict {
 			updateValue(v, forKey: k)
 		}
 	}
 	
-	static func += (left: inout [Key: Value], right: [Key: Value]) {
+	static public func += (left: inout [Key: Value], right: [Key: Value]) {
 		for (k, v) in right {
 			left[k] = v
 		}
 	}
 	
-	static func + (left: inout [Key: Value], right: [Key: Value]) -> [Key: Value] {
+	static public func + (left: inout [Key: Value], right: [Key: Value]) -> [Key: Value] {
 		var result: [Key: Value] = [:]
 		for (k, v) in right {
 			result[k] = v
@@ -47,7 +47,7 @@ extension Dictionary {
 		return result
 	}
     
-    mutating func trim(header key: Key, placeholder: Value) {
+    mutating public func trim(header key: Key, placeholder: Value) {
         updateValue(placeholder, forKey: key)
     }
 }

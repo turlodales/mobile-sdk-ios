@@ -6,6 +6,8 @@
 //
 
 import Foundation
+import CrowdinAPI
+import CrowdinCore
 
 class CrowdinXliffMappingDownloadOperation: CrowdinDownloadOperation {
     var completion: (([String: String]?, [AnyHashable: Any]?, Error?) -> Void)? = nil

@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import CrowdinAPI
 
 typealias CrowdinJsonDownloadOperationCompletion = ([String: String]?, [AnyHashable: Any]?, Error?) -> Void
 

@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import CrowdinCore
 
 class CrowdinRemoteLocalizationStorage: RemoteLocalizationStorageProtocol {
     var localization: String

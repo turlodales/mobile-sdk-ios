@@ -9,26 +9,52 @@ let package = Package(
         .iOS(.v9)
     ],
     products: [
-        .library(name: "CrowdinSDK", targets: ["CrowdinSDK"])
+        .library(name: "CrowdinSDK", targets: ["CrowdinCore", "CrowdinProvider"])
     ],
     dependencies: [
         .package(url: "https://github.com/serhii-londar/BaseAPI.git", .upToNextMajor(from: "0.2.0")),
         .package(url: "https://github.com/daltoniam/Starscream.git", .upToNextMajor(from: "3.1.0"))
     ],
     targets: [
-        .target(name: "CrowdinSDK",
-                dependencies: ["BaseAPI", "Starscream"],
-                path: "Sources/CrowdinSDK",
+        .target(name: "CrowdinCore",
+                dependencies: [
+//                    "BaseAPI",
+//                    "Starscream"
+                ],
+                path: "Sources/CrowdinSDK/CrowdinCore",
                 exclude: [
-                    "Providers/Firebase/"
+//                    "Providers",
+//                    "Settings",
+//                    "Features",
+//                    "CrowdinAPI"
                 ],
                 resources: [
-                    .process("Resources/Settings/CrowdinLogsVC.storyboard"),
-                    .process("Resources/Settings/Images.xcassets"),
-                    .process("Resources/Settings/SettingsItemCell.xib"),
-                    .process("Resources/Settings/SettingsView.xib")
-                ], swiftSettings: [
+//                    .process("Resources/Settings/CrowdinLogsVC.storyboard"),
+//                    .process("Resources/Settings/Images.xcassets"),
+//                    .process("Resources/Settings/SettingsItemCell.xib"),
+//                    .process("Resources/Settings/SettingsView.xib")
+                ],
+                swiftSettings: [
                     .define("CrowdinSDKSPM")
-                ])
+                ]),
+        .target(name: "CrowdinProvider",
+                dependencies: [
+                    "CrowdinCore",
+                    "CrowdinAPI"
+                ],
+                path: "Sources/CrowdinSDK/Providers/Crowdin",
+                swiftSettings: [
+                    .define("CrowdinSDKSPM")
+                ]),
+        .target(name: "CrowdinAPI",
+                dependencies: [
+                    "CrowdinCore",
+                    "BaseAPI",
+                    "Starscream",
+                ],
+                path: "Sources/CrowdinSDK/CrowdinAPI",
+                swiftSettings: [
+                    .define("CrowdinSDKSPM")
+                ]),
     ]
 )

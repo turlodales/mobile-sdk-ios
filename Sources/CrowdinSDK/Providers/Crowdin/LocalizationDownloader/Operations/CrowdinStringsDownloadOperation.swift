@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import CrowdinAPI
 
 class CrowdinStringsDownloadOperation: CrowdinDownloadOperation {
     var completion: (([String: String]?, Error?) -> Void)? = nil

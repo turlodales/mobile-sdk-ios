@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol CrowdinLanguage {
+public protocol CrowdinLanguage {
     var id: String { get }
     var name: String { get }
     var twoLettersCode: String { get }
@@ -18,7 +18,7 @@ protocol CrowdinLanguage {
 }
 
 extension CrowdinLanguage {
-    var iOSLanguageCode: String {
+    public var iOSLanguageCode: String {
         return self.osxLocale.replacingOccurrences(of: "_", with: "-")
     }
 }
