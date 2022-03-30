@@ -16,6 +16,11 @@ extension Bundle {
     /// Swizzled localizedString(forKey:value:table:) method.
     static var swizzled: Method!
     
+    /// Original localizedString(forKey:value:table:) method.
+    static var originalAttr: Method!
+    /// Swizzled localizedString(forKey:value:table:) method.
+    static var swizzledAttr: Method!
+    
     static var isSwizzled: Bool {
         return original != nil && swizzled != nil
     }
@@ -34,10 +39,22 @@ extension Bundle {
         }
         return translation ?? key
     }
+    
+    @objc func swizzled_LocalizedAttributedString(forKey key: String, value: String?, table tableName: String?) -> NSAttributedString {
+        var translation = Localization.current.localizedString(for: key)
+        if translation == nil {
+            translation = swizzled_LocalizedString(forKey: key, value: value, table: tableName)
+        }
+        return NSAttributedString(string: translation ?? key)
+    }
 
     /// Method for swizzling implementation for localizedString(forKey:value:table:) method.
     class func swizzle() {
         // swiftlint:disable force_unwrapping
+        originalAttr = class_getInstanceMethod(self, NSSelectorFromString("localizedAttributedStringForKey:value:table:"))!
+        swizzledAttr = class_getInstanceMethod(self, #selector(Bundle.swizzled_LocalizedAttributedString(forKey:value:table:)))!
+        method_exchangeImplementations(originalAttr, swizzledAttr)
+        
         original = class_getInstanceMethod(self, #selector(Bundle.localizedString(forKey:value:table:)))!
         swizzled = class_getInstanceMethod(self, #selector(Bundle.swizzled_LocalizedString(forKey:value:table:)))!
         method_exchangeImplementations(original, swizzled)
