@@ -9,8 +9,8 @@ import Foundation
 
 extension ManifestManager: LanguageResolver {
     var allLanguages: [CrowdinLanguage] {
-        let crowdinLanguages: [CrowdinLanguage] = CrowdinSupportedLanguages.shared.supportedLanguages?.data.map({ $0.data }) ?? []
-        let customLaguages: [CrowdinLanguage] = customLanguages ?? []
+        let crowdinLanguages: [CrowdinLanguage] = crowdinSupportedLanguages.supportedLanguages?.data.map({ $0.data }) ?? []
+        let customLaguages: [CrowdinLanguage] = customLanguages
         let allLanguages: [CrowdinLanguage] = crowdinLanguages + customLaguages
         return allLanguages
     }
@@ -20,7 +20,7 @@ extension ManifestManager: LanguageResolver {
     func crowdinLanguageCode(for localization: String) -> String? {
         crowdinSupportedLanguage(for: localization)?.id
     }
-    
+
     func crowdinSupportedLanguage(for localization: String) -> CrowdinLanguage? {
         var language = allLanguages.first(where: { $0.iOSLanguageCode == localization })
         if language == nil {
@@ -35,8 +35,8 @@ extension ManifestManager: LanguageResolver {
         }
         return language
     }
-    
+
     func iOSLanguageCode(for crowdinLocalization: String) -> String? {
-        allLanguages.first(where: { $0.id == crowdinLocalization })?.osxLocale
+        allLanguages.first(where: { $0.id == crowdinLocalization })?.iOSLanguageCode
     }
 }
